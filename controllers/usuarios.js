@@ -1,11 +1,12 @@
 const { response } = require('express');
 
 const usuariosGet =  (req, res = response)=>{
-  const { id, saludo, pagina="1" } = req.query;
+  const { id, nombre, edad, pagina="1" } = req.query;
   res.json({       
     msg: "API-GET con controller usuariosGet",
-    saludo,
+    nombre,
     id,
+    edad,
     pagina
   })
 }
@@ -20,10 +21,11 @@ const usuariosPost =  (req, res = response)=>{
 }
 
 const usuariosPut =  (req, res = response)=>{
-  const id = req.params.id
+  const {id1, id2} = req.params
   res.json({       
     msg: "API-PUT con controller usuariosPut",
-    id
+    id1,
+    id2
   })
 }
 
