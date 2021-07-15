@@ -9,8 +9,7 @@ const UsuarioSchema = Schema({
   },
   correo: {
     type: String,
-    required: [ true, 'El correo es obligatorio'],
-    unique: true
+    required: [ true, 'El correo es obligatirio']
   },
   password: {
     type: String,
