@@ -2,14 +2,30 @@ const { response } = require('express');
 const Usuario = require('../models/usuario');
 const bcryptjs = require('bcryptjs');
 
-const usuariosGet =  (req, res = response)=>{
-  const { id, nombre, edad, pagina="1" } = req.query;
+const usuariosGet = async (req, res = response)=>{
+  // const { id, nombre, edad, pagina="1" } = req.query;
+  const { limite=5, desde=0} = req.query;
+  const query = {estado: true};
+
+  // const usuarios = await Usuario.find(query)
+    // .skip( Number(desde) )
+    // .limit( Number(limite) )
+// 
+  // const total = await Usuario.countDocuments(query);
+
+  // mas rápido con 
+  const [total, usuarios] = await Promise.all([
+    Usuario.countDocuments(query),
+    Usuario.find(query)
+     .skip( Number(desde) )
+     .limit( Number(limite) )
+  ])
+
   res.json({       
-    msg: "API-GET con controller usuariosGet",
-    nombre,
-    id,
-    edad,
-    pagina
+    // msg: "API-GET con controller usuariosGet",
+    total,
+    usuarios
+    
   })
 }
 
