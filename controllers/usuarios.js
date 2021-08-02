@@ -67,9 +67,19 @@ const usuariosPut = async (req = request, res = response)=>{
   })
 }
 
-const usuariosDelete =  (req, res = response)=>{
+const usuariosDelete = async (req, res = response)=>{
+
+  const {id} = req.params;
+
+  // Borrar fisicamente (no recomendable)
+  // const usuario = await Usuario.findByIdAndDelete(id);
+
+  // Borrar cambiando estado
+  const usuario = await Usuario.findByIdAndUpdate( id, {estado: false});
+
   res.json({       
-    msg: "API-DELETE con controller usuariosDelete"
+    msg: "API-DELETE con controller usuariosDelete",
+   usuario
   })
 }
 
